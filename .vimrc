@@ -22,15 +22,26 @@ filetype plugin on
 " reload .vimrc
 map <C-w>r :source ~/.vimrc<CR>
 
+" set netrw sort sequence
+let g:netrw_sort_sequence='[\/]$,*'
+
 " enable syntax highlighting
 syntax on
 
-" set line wrapping on
+" set/toggle line wrapping on
 set wrap
+nnoremap <C-w>w :set wrap!<CR>
 
 " knock off some stoopid auto-comment crap
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set smartindent
+
+" fix the behavior of backspace
+set backspace=indent,eol,start
+
+" undo/redo
+nnoremap u :undo<CR>
+nnoremap U :redo<CR>
 
 " stop removing indentation from comments in python
 inoremap # X<c-h>#
@@ -43,12 +54,23 @@ nnoremap gj j
 map <Up> k
 map <Down> j
 
+" e to move forward, E to move backward
+nnoremap E b
+
+" toggle virtual edit mode
+nnoremap <C-w>v :set virtualedit=all<CR>
+nnoremap <C-w>V :set virtualedit=<CR>
+
 " always how the cursor position
 set ruler
 
-" show line numbers
+" show/toggle line numbers
+nnoremap <C-w>n :set number!<CR>
 set number
 set numberwidth=5
+
+" keep cursor away from top/bottom of window (when possible)
+set scrolloff=5
 
 " set behavior of tab completion
 set wildmode=longest,list
@@ -87,6 +109,9 @@ nnoremap <silent> <C-w>z <C-w>\|<C-w>_
 nmap <silent> <C-w>t :tabe<CR>
 "" C-w T
 
+" allow <C-w>E to move back a word
+
+
 " clang_complete
 " let g:clang_library_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 
@@ -106,7 +131,7 @@ set expandtab
 color default
 
 " show invisibles
-nmap <leader>l :set list!<CR>
+nmap <C-w>i :set list!<CR>
 set listchars=tab:»\ ,trail:·,nbsp:·,eol:¬
 set list
 
